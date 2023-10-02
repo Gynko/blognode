@@ -12,12 +12,12 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link className="header-links" to="/api/blogcontent">
+            <Link className="header-links" to="/blog">
               Blog
             </Link>
           </li>
           <li>
-            <Link className="header-links" to="/api/login">
+            <Link className="header-links" to="/login">
               Login
             </Link>
           </li>

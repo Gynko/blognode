@@ -12,11 +12,11 @@ function App() {
       element: <Home />,
     },
     {
-      path: "/api/blogcontent",
+      path: "/blog",
       element: <BlogContentPage />,
     },
     {
-      path: "/api/login",
+      path: "/login",
       element: <LoginPage />,
     },
   ]);

@@ -8,7 +8,7 @@ export default function Home() {
       <Header />
       <section className="section-page">
         <h1>Yoann Godiet's website </h1>
-        <Link className="home-link-blog" to="/api/blogcontent">
+        <Link className="home-link-blog" to="/blog">
           Blog
         </Link>
       </section>
