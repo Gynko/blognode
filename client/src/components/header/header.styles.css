@@ -1,0 +1,30 @@
+.header {
+  background-color: var(--header-bg-color);
+  height: var(--header-height);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.header-nav,
+.header-ul {
+  height: 100%;
+}
+
+.header-nav {
+  width: clamp(20rem, 50%, 30rem);
+}
+
+.header-ul {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-around;
+  align-content: center;
+}
+
+.header-links {
+  color: white;
+  font-size: clamp(1.5rem, 2vw, 2rem);
+}

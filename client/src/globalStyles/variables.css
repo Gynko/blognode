@@ -1,0 +1,7 @@
+:root {
+  /* Sizes */
+  --header-height: clamp(4rem, 5vw, 6rem);
+
+  /* Colors */
+  --header-bg-color: rgb(97, 74, 74);
+}
