@@ -7,9 +7,10 @@ export default function Home() {
     <div>
       <Header />
       <section className="section-page">
-        <h1>Welcome to the DevBlog of Yoann</h1>
-        <Link to="/api/blogcontent">Blog</Link>
-        <Link to="/api/login">Login</Link>
+        <h1>Yoann Godiet's website </h1>
+        <Link className="home-link-blog" to="/api/blogcontent">
+          Blog
+        </Link>
       </section>
     </div>
   );

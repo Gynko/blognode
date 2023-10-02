@@ -1,10 +1,11 @@
 import Header from "../../components/header/header.component";
+import "./blogContent.styles.css";
 
 export default function BlogContentPage() {
   return (
     <div>
       <Header />
-      <h1>Blog Content Page</h1>
+      <section></section>
     </div>
   );
 }

@@ -6,3 +6,8 @@
   align-items: center;
   gap: clamp(3rem, 5vw, 5rem);
 }
+
+.home-link-blog {
+  border: 1px solid var(--links-color);
+  padding: 1rem 2rem;
+}
