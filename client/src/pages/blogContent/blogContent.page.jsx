@@ -8,12 +8,12 @@ export default function BlogContentPage() {
   return (
     <div>
       <Header />
-      <section>
-        <h1>Blog</h1>
+      <section className="section-container">
         {blogPosts.map((blogPost) => (
-          <div key={blogPost.title}>
-            <h2>{blogPost.title}</h2>
-            <p>{blogPost.description}</p>
+          <div className="post-container" key={blogPost.title}>
+            <h2 className="post-title">{blogPost.title}</h2>
+            <p className="post-date">{blogPost.date}</p>
+            <p className="post-description">{blogPost.description}</p>
           </div>
         ))}
       </section>
