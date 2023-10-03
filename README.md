@@ -21,9 +21,6 @@
 - [2. Process](#2-process)
   - [2.1. Design](#21-design)
   - [2.2. Code](#22-code)
-- [My Express Application](#my-express-application)
-  - [Installation](#installation)
-  - [Known Issues](#known-issues)
 
 # 1. Presentation of the assignment
 
@@ -126,15 +123,3 @@ I could also see that when I would get the response from the backend whether the
 5. I implemented in my backend my first route to the blogposts, read by node from a json file.
 6. I implemented this route in the frontend, and displayed the blogposts.
 7. I implemented the login
-
-# My Express Application
-
-## Installation
-
-To install Express for this application, run the following command in your terminal:
-
-\```shell
-npm install express
-\```
-
-## Known Issues
