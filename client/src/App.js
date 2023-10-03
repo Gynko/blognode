@@ -6,6 +6,7 @@ import "./globalStyles/reset.css";
 import "./globalStyles/variables.css";
 
 function App() {
+  
   const router = createBrowserRouter([
     {
       path: "/",
