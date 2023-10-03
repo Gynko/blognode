@@ -99,4 +99,4 @@ I started drawing a mockup in Figma. This helped me to get a better overview of 
 
 For example, I could see that I needed to have in my frontend a state for the currentUser, which would be used by the header to display the login logout and by the blogposts to add a delete/edit buttons next to each posts.
 
-![Mockup](<[./mockup.png](https://i.ibb.co/SPd7kYs/Screenshot-2023-10-03-at-09-21-55.png)>)
+![Mockup](https://i.ibb.co/SPd7kYs/Screenshot-2023-10-03-at-09-21-55.png)
