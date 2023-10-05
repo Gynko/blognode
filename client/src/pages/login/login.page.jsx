@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { MyContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 import "./login.styles.css";
 
 export default function LoginPage() {
+  const contextData = useContext(MyContext);
+  const { setUser } = contextData;
+  let navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -19,13 +25,12 @@ export default function LoginPage() {
     })
       .then((response) => {
         if (response.status === 200) {
-          console.log("yeah");
+          setUser((oldData) => formData);
+          return navigate("/blog");
         } else if (response.status === 401) {
           alert(
             "Are you trying to check if I handled wrong credentials, Egil?"
           );
-        } else {
-          throw new Error("Something went wrong"); // For other statuses, throw a different error
         }
       })
       .catch((error) => {

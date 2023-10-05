@@ -1,12 +1,18 @@
-import BlogContentPage from "./pages/blogContent/blogContent.page";
+import { useState, createContext } from "react";
+
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import BlogContentPage from "./pages/blogContent/blogContent.page";
 import LoginPage from "./pages/login/login.page";
 import Home from "./pages/home/home.page";
+import Header from "./components/header/header.component";
 import "./globalStyles/reset.css";
 import "./globalStyles/variables.css";
-import Header from "./components/header/header.component";
+
+export const MyContext = createContext();
 
 export default function App() {
+  const [user, setUser] = useState({ username: "", password: "" });
+
   function BasicLayout() {
     return (
       <>
@@ -37,5 +43,9 @@ export default function App() {
     },
   ]);
 
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <MyContext.Provider value={{ user, setUser }}>
+      <RouterProvider router={router}></RouterProvider>
+    </MyContext.Provider>
+  );
 }
