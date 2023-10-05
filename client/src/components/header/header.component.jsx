@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./header.styles.css";
 
 export default function Header() {
@@ -25,7 +25,6 @@ export default function Header() {
           </ul>
         </nav>
       </header>
-      <Outlet />
     </>
   );
 }
