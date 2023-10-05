@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Header from "../../components/header/header.component";
+
 import "./login.styles.css";
 
 export default function LoginPage() {
@@ -43,7 +43,6 @@ export default function LoginPage() {
 
   return (
     <div>
-      <Header />
       <section className="section-container">
         <h1 className="login-title">Administrator Login</h1>
         <form className="form" onSubmit={onUserSubmit}>
