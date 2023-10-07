@@ -1,11 +1,13 @@
-import { Link } from "react-router-dom";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { MyContext } from "../../App";
 import "./header.styles.css";
 
 export default function Header() {
   const contextData = useContext(MyContext);
   const { user } = contextData;
+  const isLoggedIn = document.cookie.includes("user=");
+  console.log(isLoggedIn, user);
   return (
     <>
       <header className="header">
@@ -21,7 +23,7 @@ export default function Header() {
                 Blog
               </Link>
             </li>
-            {user.username !== "" ? (
+            {user.username !== "" && isLoggedIn ? (
               <li>
                 <Link className="header-links" to="/login">
                   Logout, {user.username}

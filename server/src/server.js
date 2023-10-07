@@ -1,13 +1,19 @@
-const http = require("http");
+const https = require("https");
 const app = require("./app");
-const { start } = require("repl");
+const fs = require("fs");
 
 const PORT = 8000;
-const server = http.createServer(app);
+
+const serverOptions = {
+  key: fs.readFileSync("./key.pem"),
+  cert: fs.readFileSync("./cert.pem"),
+};
+
+const server = https.createServer(serverOptions, app);
 
 async function startServer() {
   server.listen(PORT, () => {
-    console.log(`Server is listening on port http://localhost:${PORT}`);
+    console.log(`Server is listening on port https://localhost:${PORT}`);
   });
 }
 startServer();

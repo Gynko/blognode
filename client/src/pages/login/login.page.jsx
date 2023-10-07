@@ -1,12 +1,10 @@
-import { useState, useContext } from "react";
-import { MyContext } from "../../App";
+import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 
 import "./login.styles.css";
 
 export default function LoginPage() {
-  const contextData = useContext(MyContext);
-  const { setUser } = contextData;
   let navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -16,7 +14,7 @@ export default function LoginPage() {
 
   function onUserSubmit(event) {
     event.preventDefault();
-    fetch("http://localhost:8000/api/login", {
+    fetch("https://localhost:8000/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,7 +23,6 @@ export default function LoginPage() {
     })
       .then((response) => {
         if (response.status === 200) {
-          setUser((oldData) => formData);
           return navigate("/blog");
         } else if (response.status === 401) {
           alert(

@@ -8,6 +8,10 @@ function httpLoginSubmit(req, res) {
   });
 
   if (isValidUser) {
+    res.cookie("user", username, {
+      maxAge: 1000 * 60 * 60 * 24 * 30, // 1 month cookie
+      httpOnly: false,
+    });
     res.status(200).json({ message: "Login successful!" });
   } else {
     res.status(401).json({ message: "Invalid username or password" });

@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import BlogContentPage from "./pages/blogContent/blogContent.page";
@@ -12,7 +12,12 @@ export const MyContext = createContext();
 
 export default function App() {
   const [user, setUser] = useState({ username: "", password: "" });
-
+  useEffect(() => {
+    const isLoggedIn = document.cookie.includes("user=");
+    if (isLoggedIn) {
+      setUser({ username: document.cookie.split("=")[1] });
+    }
+  }, []);
   function BasicLayout() {
     return (
       <>

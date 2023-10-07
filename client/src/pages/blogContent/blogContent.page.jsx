@@ -1,16 +1,7 @@
-import { useEffect } from "react";
-import { useContext } from "react";
-import { MyContext } from "../../App";
-
 import useBlogPosts from "../../hooks/useBlogPosts";
 import "./blogContent.styles.css";
 
 export default function BlogContentPage() {
-  const contextData = useContext(MyContext);
-  const { user } = contextData;
-  useEffect(() => {
-    console.log("Annnd the useerrr isss", user);
-  }, [user]);
   const blogPosts = useBlogPosts();
   return (
     <div>
