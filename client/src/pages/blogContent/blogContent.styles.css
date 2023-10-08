@@ -27,3 +27,23 @@
   font-size: 1.2rem;
   margin-bottom: 1rem;
 }
+
+.new-article-container {
+  display: flex;
+  flex-flow: column nowrap;
+  width: clamp(30rem, 30vw, 40rem);
+}
+
+.new-article-form {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.new-article-textarea {
+  width: 100%;
+}
+
+.new-article-greeting {
+  text-align: center;
+  margin-bottom: 1rem;
+}

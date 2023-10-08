@@ -8,7 +8,7 @@ import "./header.styles.css";
 export default function Header() {
   const contextData = useContext(MyContext);
   const { user, setUser } = contextData;
-  const isLoggedIn = document.cookie.includes("user=");
+
   const navigate = useNavigate();
   function handleLogout() {
     // Clear user from context/state
@@ -36,7 +36,7 @@ export default function Header() {
                 Blog
               </Link>
             </li>
-            {user.username !== "" && isLoggedIn ? (
+            {user.username !== "" ? (
               <li>
                 <button
                   className="header-button-logout header-links"
