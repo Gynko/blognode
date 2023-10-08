@@ -9,7 +9,7 @@ function httpLoginSubmit(req, res) {
 
   if (isValidUser) {
     res.cookie("user", username, {
-      maxAge: 1000 * 60 * 60 * 24 * 30, // 1 month cookie
+      maxAge: 1000 * 60 * 60 * 24 * 31, // 1 month cookie
       httpOnly: false,
     });
     res.status(200).json({ message: "Login successful!" });
@@ -18,4 +18,9 @@ function httpLoginSubmit(req, res) {
   }
 }
 
-module.exports = { httpLoginSubmit };
+function httpLogout(req, res) {
+  res.clearCookie("user");
+  res.status(200).json({ message: "Logged out successfully" });
+}
+
+module.exports = { httpLoginSubmit, httpLogout };

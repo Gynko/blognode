@@ -1,7 +1,8 @@
 const express = require("express");
 const loginRouter = express.Router();
-const { httpLoginSubmit } = require("./login.controller");
+const { httpLoginSubmit, httpLogout } = require("./login.controller");
 
-loginRouter.post("/", httpLoginSubmit);
+loginRouter.post("/login", httpLoginSubmit);
+loginRouter.post("/logout", httpLogout);
 
 module.exports = loginRouter;

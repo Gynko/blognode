@@ -17,7 +17,7 @@ app.use(
 );
 
 app.use("/api/blogcontent", blogpostsRouter);
-app.use("/api/login", loginRouter);
+app.use("/api", loginRouter);
 
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "index.html"));

@@ -27,4 +27,10 @@
 .header-links {
   color: white;
   font-size: clamp(1.5rem, 2vw, 2rem);
+  cursor: pointer;
+}
+
+.header-button-logout {
+  background: none;
+  border: none;
 }

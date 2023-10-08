@@ -11,13 +11,21 @@ import "./globalStyles/variables.css";
 export const MyContext = createContext();
 
 export default function App() {
-  const [user, setUser] = useState({ username: "", password: "" });
+  const [user, setUser] = useState({ username: "" });
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+  }
+
   useEffect(() => {
-    const isLoggedIn = document.cookie.includes("user=");
-    if (isLoggedIn) {
-      setUser({ username: document.cookie.split("=")[1] });
+    const usernameFromCookie = getCookie("user");
+    if (usernameFromCookie) {
+      setUser({ username: usernameFromCookie });
     }
   }, []);
+
   function BasicLayout() {
     return (
       <>

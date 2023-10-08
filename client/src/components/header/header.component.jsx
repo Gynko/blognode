@@ -1,13 +1,26 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 import { MyContext } from "../../App";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 import "./header.styles.css";
 
 export default function Header() {
   const contextData = useContext(MyContext);
-  const { user } = contextData;
+  const { user, setUser } = contextData;
   const isLoggedIn = document.cookie.includes("user=");
-  console.log(isLoggedIn, user);
+  const navigate = useNavigate();
+  function handleLogout() {
+    // Clear user from context/state
+    setUser({ username: "" });
+    navigate("/login"); // Ensure you've imported `useNavigate`
+
+    // Make a request to the server to handle server-side logout
+    fetch("/api/logout", { method: "POST" })
+      .then(/* handle response if necessary */)
+      .catch(console.error);
+  }
+
   return (
     <>
       <header className="header">
@@ -25,9 +38,12 @@ export default function Header() {
             </li>
             {user.username !== "" && isLoggedIn ? (
               <li>
-                <Link className="header-links" to="/login">
+                <button
+                  className="header-button-logout header-links"
+                  onClick={handleLogout}
+                >
                   Logout, {user.username}
-                </Link>
+                </button>
               </li>
             ) : (
               <li>
