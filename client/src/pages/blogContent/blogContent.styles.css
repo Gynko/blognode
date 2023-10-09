@@ -12,9 +12,9 @@
 
 .post-container {
   display: flex;
+  position: relative;
   flex-flow: column nowrap;
-  width: clamp(30rem, 30vw, 40rem);
-  border: 1px solid black;
+  width: clamp(50rem, 40vw, 50rem);
   padding: 1rem;
 }
 
@@ -37,6 +37,8 @@
 .new-article-form {
   display: flex;
   flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .new-article-textarea {
@@ -44,6 +46,7 @@
   background: none;
   height: 15rem;
   margin-bottom: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .new-article-greeting {
@@ -58,4 +61,41 @@
   text-align: center;
   margin-bottom: 1rem;
   font-size: 1.5rem;
+}
+
+.new-article-submit {
+  background-color: black;
+  color: white;
+  font-size: 1.5rem;
+  width: 8rem;
+  border: none;
+  padding: 0.5rem;
+}
+
+.post-container {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.article-container {
+  border: 1px solid black;
+  padding: 1rem;
+  width: 36rem;
+}
+
+.article-button-admin-container {
+  display: flex;
+  flex-flow: column nowrap;
+
+  justify-content: center;
+}
+
+.buttons-edit {
+  background-color: black;
+  border: 1px solid black;
+  padding: 2rem;
+  color: white;
+  margin-bottom: 0.5rem;
+  margin: 1rem;
+  font-size: 1.2rem;
 }
