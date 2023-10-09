@@ -7,7 +7,7 @@
 
 # Table of Content <!-- omit in toc -->
 
-- [1. Presentation of the assignment](#1-presentation-of-the-assignment)
+- [1. Installing](#1-installing)
   - [1.1. Description](#11-description)
     - [1.1.1. Setup of the Project](#111-setup-of-the-project)
     - [1.1.2. Administrator User](#112-administrator-user)
@@ -22,7 +22,17 @@
   - [2.1. Design](#21-design)
   - [2.2. Code](#22-code)
 
-# 1. Presentation of the assignment
+# 1. Installing
+
+1. cd into the root folder (/blog)
+2. Install the dependencies of the client and the server at the same time
+```bash
+npm run install
+```
+3. Build the react app and start the node server
+```bash
+npm run deploy
+```
 
 ## 1.1. Description
 
