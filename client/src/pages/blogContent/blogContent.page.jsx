@@ -36,6 +36,10 @@ export default function BlogContentPage() {
       });
 
       if (response.ok) {
+        setFormData({
+          title: "",
+          description: "",
+        });
         refetch();
       } else {
         console.error("Failed to post data:", await response.text());
@@ -105,7 +109,7 @@ export default function BlogContentPage() {
               <textarea
                 className="new-article-textarea"
                 name="description"
-                value={formData.content}
+                value={formData.description}
                 onChange={handleInputChange}
                 required
               />

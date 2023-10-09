@@ -6,7 +6,7 @@ import "./login.styles.css";
 
 export default function LoginPage() {
   const contextData = useContext(MyContext);
-  const { user, setUser } = contextData;
+  const { setUser } = contextData;
   let navigate = useNavigate();
 
   const [formData, setFormData] = useState({
