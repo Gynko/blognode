@@ -122,22 +122,13 @@ export default function BlogContentPage() {
             </form>
           </div>
         )}
-
         {blogPosts
           .sort((a, b) => new Date(b.date) - new Date(a.date))
           .map((blogPost) => (
-            <div className="post-container" key={blogPost.title}>
-              {user.username === "Admin" ? (
-                <div className="article-button-admin-container">
-                  <button className="post-edit buttons-edit">Edit</button>
-                  <button className="post-delete buttons-edit">Delete</button>
-                </div>
-              ) : null}
-              <div className="article-container">
-                <h2 className="post-title">{blogPost.title}</h2>
-                <p className="post-date">{formatDate(blogPost.date)}</p>
-                <p className="post-description">{blogPost.description}</p>
-              </div>
+            <div className="article-container">
+              <h2 className="post-title">{blogPost.title}</h2>
+              <p className="post-date">{formatDate(blogPost.date)}</p>
+              <p className="post-description">{blogPost.description}</p>
             </div>
           ))}
       </section>

@@ -10,11 +10,5 @@
     "title": "Semantic HTML",
     "description": "Semantic HTML enhances web content clarity through meaningful tags, aiding both user agents and developers. By using elements like <article>, <nav>, and <aside>, it provides context to browsers and assistive technologies, improving accessibility. Semantic markup ensures web pages are structured logically, benefiting SEO and maintainability.",
     "date": "2022-01-20T22:55:16.790558Z"
-  },
-  {
-    "title": "Hello",
-    "description": "world\n",
-    "id": 3,
-    "date": "2023-10-09T16:35:10.314Z"
   }
 ]
