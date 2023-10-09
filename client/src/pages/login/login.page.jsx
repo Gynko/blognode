@@ -33,9 +33,7 @@ export default function LoginPage() {
           setUser({ username: formData.username });
           return navigate("/blog");
         } else if (response.status === 401) {
-          alert(
-            "Are you trying to check if I handled wrong credentials, Egil?"
-          );
+          alert("Wrong credentials. Memory is a tricky thing.");
         }
       })
       .catch((error) => {
