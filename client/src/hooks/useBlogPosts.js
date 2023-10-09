@@ -12,5 +12,5 @@ export default function useBlogPosts() {
   useEffect(() => {
     getBlogPosts();
   }, [getBlogPosts]);
-  return blogPosts;
+  return { blogPosts, refetch: getBlogPosts };
 }

@@ -10,10 +10,11 @@ export default function BlogContentPage() {
   });
   const contextData = useContext(MyContext);
   const { user } = contextData;
-  const blogPosts = useBlogPosts();
+
+  const { blogPosts, refetch } = useBlogPosts();
   useEffect(() => {
-    console.log("user:", user.username);
-  }, [user]);
+    refetch();
+  }, [refetch]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -23,17 +24,25 @@ export default function BlogContentPage() {
     });
   };
 
-  const onHandleSubmit = (event) => {
+  const onHandleSubmit = async (event) => {
     event.preventDefault();
-    fetch("https://localhost:8000/api/blogcontent", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify([formData]),
-    }).then((response) => {
-      blogPosts();
-    });
+    try {
+      const response = await fetch("https://localhost:8000/api/blogcontent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify([formData]),
+      });
+
+      if (response.ok) {
+        refetch();
+      } else {
+        console.error("Failed to post data:", await response.text());
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   function formatDate(isoString) {
@@ -110,21 +119,23 @@ export default function BlogContentPage() {
           </div>
         )}
 
-        {blogPosts.map((blogPost) => (
-          <div className="post-container" key={blogPost.title}>
-            {user.username === "Admin" ? (
-              <div className="article-button-admin-container">
-                <button className="post-edit buttons-edit">Edit</button>
-                <button className="post-delete buttons-edit">Delete</button>
+        {blogPosts
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .map((blogPost) => (
+            <div className="post-container" key={blogPost.title}>
+              {user.username === "Admin" ? (
+                <div className="article-button-admin-container">
+                  <button className="post-edit buttons-edit">Edit</button>
+                  <button className="post-delete buttons-edit">Delete</button>
+                </div>
+              ) : null}
+              <div className="article-container">
+                <h2 className="post-title">{blogPost.title}</h2>
+                <p className="post-date">{formatDate(blogPost.date)}</p>
+                <p className="post-description">{blogPost.description}</p>
               </div>
-            ) : null}
-            <div className="article-container">
-              <h2 className="post-title">{blogPost.title}</h2>
-              <p className="post-date">{formatDate(blogPost.date)}</p>
-              <p className="post-description">{blogPost.description}</p>
             </div>
-          </div>
-        ))}
+          ))}
       </section>
     </div>
   );

@@ -6,7 +6,7 @@ function httpGetBlogPosts(req, res) {
   return res.status(200).json(blogPostsJson);
 }
 
-let blogPostsCounter = 2;
+let blogPostsCounter = blogPostsJson.length;
 function httpPostNewBlogPost(req, res) {
   const newBlogPost = req.body[0];
   blogPostsCounter++;
