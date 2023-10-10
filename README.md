@@ -1,9 +1,6 @@
-# Node JS school project install <!-- omit in toc -->
+# Node JS school project <!-- omit in toc -->
 
-1. Clone the repo
-2. At the root of the folder, type npm install, which will install the dependencies of the client and the server at the same time.
-3. Still at the root of the server, type npm run deploy, which will build the react app and start the node server.
-4. Enjoy.
+A simple blog application using Node.js, express, react, a self-signed certificate for https and a simple Model View Controller architecture for the server.
 
 # Table of Content <!-- omit in toc -->
 
@@ -25,13 +22,13 @@
 # 1. Installing
 
 1. cd into the root folder (/blog)
-2. Install the dependencies of the client and the server at the same time
+2. Install the dependencies of the client and the server at the same time with
 
 ```bash
 npm run install
 ```
 
-3. Build the react app and start the node server
+3. Build the react app and start the node server with
 
 ```bash
 npm run deploy
@@ -131,6 +128,6 @@ I could also see that when I would get the response from the backend whether the
 
 ## 2.2. Architecture
 
-0. The server is using a simple MVC architecture, with for each route:  a router, a controller and a model for each resource (user and blogpost). The model is using a simple json file to store the data. The controller is using the model to get the data and manipulate it. The router is using the controller to set the right CRUD operation for the route, with the appropriate controller function.
+0. The server is using a simple MVC architecture, with for each route: a router, a controller and a model for each resource (user and blogpost). The model is using a simple json file to store the data. The controller is using the model to get the data and manipulate it. The router is using the controller to set the right CRUD operation for the route, with the appropriate controller function.
 1. server.js: The entry point of the server, it starts the server on https using a self-signed certificate created with mkcert.
 2. app.js: sets up the middleware, the routes and injects the frontend.
