@@ -1,4 +1,4 @@
-const credentials = require("../../data/secretCredentials.json");
+const credentials = require("../../model/secretCredentials.json");
 
 function httpLoginSubmit(req, res) {
   const { username, password } = req.body[0];

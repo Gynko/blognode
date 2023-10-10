@@ -1,4 +1,4 @@
-const blogPostsJson = require("../../data/blogposts.json");
+const blogPostsJson = require("../../model/blogposts.json");
 const fs = require("fs");
 const path = require("path");
 
@@ -14,7 +14,7 @@ function httpPostNewBlogPost(req, res) {
   newBlogPost.date = new Date().toISOString();
   blogPostsJson.push(newBlogPost);
   fs.writeFile(
-    path.join(__dirname, "..", "..", "data", "blogposts.json"),
+    path.join(__dirname, "..", "..", "model", "blogposts.json"),
     JSON.stringify(blogPostsJson, null, 2),
     (err) => {
       if (err) {
