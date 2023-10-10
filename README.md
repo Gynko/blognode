@@ -131,4 +131,3 @@ I could also see that when I would get the response from the backend whether the
 0. The server is using a simple MVC architecture, with for each route: a router, a controller and a model for each resource (user and blogpost). The model is using a simple json file to store the data. The controller is using the model to get the data and manipulate it. The router is using the controller to set the right CRUD operation for the route, with the appropriate controller function.
 1. server.js: The entry point of the server, it starts the server on https using a self-signed certificate created with mkcert.
 2. app.js: sets up the middleware, the routes and injects the frontend.
-
