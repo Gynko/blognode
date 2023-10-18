@@ -22,9 +22,11 @@ A simple blog application using Node.js, express, react, a self-signed certifica
     - [3.3.1. Blogposts](#331-blogposts)
     - [3.3.2. User](#332-user)
     - [3.3.3. React Frontend](#333-react-frontend)
-      - [3.3.3.1. Important part 1: using the cookie](#3331-important-part-1-using-the-cookie)
-      - [3.3.3.2. Important part 2: submitting new blog post](#3332-important-part-2-submitting-new-blog-post)
-      - [Important part 3: login](#important-part-3-login)
+      - [3.3.3.1. using the cookie](#3331-using-the-cookie)
+      - [3.3.3.2. submitting new blog post](#3332-submitting-new-blog-post)
+      - [3.3.3.3. login](#3333-login)
+    - [Package.json](#packagejson)
+- [Retrospective](#retrospective)
 
 # 1. Installation
 
@@ -180,9 +182,9 @@ Importantly, this cookie is not httpOnly, which means that it can be accessed by
 
 The frontend is using React, and is using the Context API to pass down the currentUser state to the different components.
 
-#### 3.3.3.1. Important part 1: using the cookie
+#### 3.3.3.1. using the cookie
 
-Using the cookie to store it in the state (passed down with the context API):
+Using the cookie to store it in the state in the root App component (and passed down with the context API):
 
 ```js
 useEffect(() => {
@@ -193,7 +195,7 @@ useEffect(() => {
 }, []);
 ```
 
-#### 3.3.3.2. Important part 2: submitting new blog post
+#### 3.3.3.2. submitting new blog post
 
 ```js
 const onHandleSubmit = async (event) => {
@@ -222,7 +224,7 @@ const onHandleSubmit = async (event) => {
 };
 ```
 
-#### Important part 3: login
+#### 3.3.3.3. login
 
 Importantly, the formData is cleaned after the fetch. But there could be security issue, as the state can be accessed by the dev tools?
 
@@ -254,3 +256,23 @@ function onUserSubmit(event) {
     });
 }
 ```
+
+### Package.json
+
+I have 3 package.json files:
+
+1. One for the frontend client
+2. One for the server
+3. One for the root folder, which is used to install all the dependencies for the client and the server at the same time with `npm run install` and to build the react app and start the node server with `npm run deploy`.
+
+Interestingly, the build of the react app is modified to land in the server folder for convenience.
+
+Having this root package.json helped a lot for productivity, making it really quick to build the frontend and test it at once.
+
+# Retrospective
+
+If I had to redo this project, I would mostly first do the frontend first with mock data, and then do the backend. I think it would have been easier to test the frontend with mock data, and then to connect it to the backend afterward.
+
+I imagine there may be a way to do it with the backend first, only using Postman to test the endpoints.
+
+The fun part would be to figure how to build both at the same time as a team.
