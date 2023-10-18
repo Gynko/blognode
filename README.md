@@ -25,8 +25,8 @@ A simple blog application using Node.js, express, react, a self-signed certifica
       - [3.3.3.1. using the cookie](#3331-using-the-cookie)
       - [3.3.3.2. submitting new blog post](#3332-submitting-new-blog-post)
       - [3.3.3.3. login](#3333-login)
-    - [Package.json](#packagejson)
-- [Retrospective](#retrospective)
+    - [3.3.4. Package.json](#334-packagejson)
+- [4. Retrospective](#4-retrospective)
 
 # 1. Installation
 
@@ -257,7 +257,7 @@ function onUserSubmit(event) {
 }
 ```
 
-### Package.json
+### 3.3.4. Package.json
 
 I have 3 package.json files:
 
@@ -269,7 +269,7 @@ Interestingly, the build of the react app is modified to land in the server fold
 
 Having this root package.json helped a lot for productivity, making it really quick to build the frontend and test it at once.
 
-# Retrospective
+# 4. Retrospective
 
 If I had to redo this project, I would mostly first do the frontend first with mock data, and then do the backend. I think it would have been easier to test the frontend with mock data, and then to connect it to the backend afterward.
 
