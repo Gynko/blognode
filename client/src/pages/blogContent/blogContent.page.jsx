@@ -130,7 +130,7 @@ export default function BlogContentPage() {
               <p className="post-date">{formatDate(blogPost.date)}</p>
               <p className="post-description">{blogPost.description}</p>
             </div>
-          ))}
+          ))}2
       </section>
     </div>
   );

@@ -13,11 +13,18 @@ A simple blog application using Node.js, express, react, a self-signed certifica
   - [2.5. Frontend](#25-frontend)
   - [2.6. Testing/Error Handling](#26-testingerror-handling)
   - [2.7. Documentation](#27-documentation)
-  - [3. Requirements](#3-requirements)
-  - [4. Extra Task (optional)](#4-extra-task-optional)
-- [5. Process](#5-process)
-  - [5.1. Design](#51-design)
-  - [5.2. Architecture](#52-architecture)
+  - [2.8. Requirements](#28-requirements)
+  - [2.9. Extra Task (optional)](#29-extra-task-optional)
+- [3. Process](#3-process)
+  - [3.1. Design](#31-design)
+  - [3.2. Architecture](#32-architecture)
+  - [3.3. Functionality](#33-functionality)
+    - [3.3.1. Blogposts](#331-blogposts)
+    - [3.3.2. User](#332-user)
+    - [3.3.3. React Frontend](#333-react-frontend)
+      - [3.3.3.1. Important part 1: using the cookie](#3331-important-part-1-using-the-cookie)
+      - [3.3.3.2. Important part 2: submitting new blog post](#3332-important-part-2-submitting-new-blog-post)
+      - [Important part 3: login](#important-part-3-login)
 
 # 1. Installation
 
@@ -92,7 +99,7 @@ Create the necessary endpoints for the following functionalities:
 
 - Write documentation for your backend API, including a description of endpoints and how they are used.
 
-## 3. Requirements
+## 2.8. Requirements
 
 - Use Node.js as the server environment.
 - Use express to create the API and the frontend.
@@ -101,7 +108,7 @@ Create the necessary endpoints for the following functionalities:
 - Upload the assignment to GitHub, make sure the repo is "private" and add "eskjelbred" as a collaborator.
 - Add the link to the Github repo in your submission on Itslearning.
 
-## 4. Extra Task (optional)
+## 2.9. Extra Task (optional)
 
 If you wish, you can add additional functionality, such as editing and deleting blog posts, user management with different types of users, or a better storage method for blog posts.
 
@@ -109,9 +116,9 @@ If you wish, you can add additional functionality, such as editing and deleting 
   - If you choose to update a post, the "date modified" should be added to the JSON file for "POST .../api/blogginnlegg".
 - DELETE .../api/blogginnlegg/:id: This endpoint can be used to delete existing blog posts.
 
-# 5. Process
+# 3. Process
 
-## 5.1. Design
+## 3.1. Design
 
 I started drawing a mockup in Figma. This helped me to get a better overview of the project and how I wanted it to look like, as well as planning the features I needed to include.
 
@@ -126,8 +133,124 @@ I could also see that when I would get the response from the backend whether the
 
 ![Mockup](https://i.ibb.co/SPd7kYs/Screenshot-2023-10-03-at-09-21-55.png)
 
-## 5.2. Architecture
+## 3.2. Architecture
 
 0. The server is using a simple MVC architecture, with for each route: a router, a controller and a model for each resource (user and blogpost). The model is using a simple json file to store the data. The controller is using the model to get the data and manipulate it. The router is using the controller to set the right CRUD operation for the route, with the appropriate controller function.
 1. server.js: The entry point of the server, it starts the server on https using a self-signed certificate created with mkcert.
 2. app.js: sets up the middleware, the routes and injects the frontend.
+3. routes: contains the routes for the different resources (user and blogposts).
+
+## 3.3. Functionality
+
+### 3.3.1. Blogposts
+
+Uses the req.body sent by frontend to create the blog post, which is written in the json file.
+
+```js
+function httpPostNewBlogPost(req, res) {
+  const newBlogPost = req.body[0];
+  blogPostsCounter++;
+  newBlogPost.id = blogPostsCounter;
+  newBlogPost.date = new Date().toISOString();
+  blogPostsJson.push(newBlogPost);
+  fs.writeFile(
+    path.join(__dirname, "..", "..", "model", "blogposts.json"),
+    JSON.stringify(blogPostsJson, null, 2),
+    (err) => {
+      if (err) {
+        console.error("Error writing file:", err);
+        return res.status(500).json({ message: "Internal Server Error" });
+      }
+
+      return res
+        .status(200)
+        .json({ message: "New blog post added!", newBlogPost });
+    }
+  );
+}
+```
+
+### 3.3.2. User
+
+Checking the credentials against the json file, and creating the cookie.
+
+Importantly, this cookie is not httpOnly, which means that it can be accessed by the frontend. This is not a good practice in terms of security, and should be changed in a real application. We are exposing that our user is the admin and a man in the middle attack would be bad.
+
+### 3.3.3. React Frontend
+
+The frontend is using React, and is using the Context API to pass down the currentUser state to the different components.
+
+#### 3.3.3.1. Important part 1: using the cookie
+
+Using the cookie to store it in the state (passed down with the context API):
+
+```js
+useEffect(() => {
+  const usernameFromCookie = getCookie("user");
+  if (usernameFromCookie) {
+    setUser({ username: usernameFromCookie });
+  }
+}, []);
+```
+
+#### 3.3.3.2. Important part 2: submitting new blog post
+
+```js
+const onHandleSubmit = async (event) => {
+  event.preventDefault();
+  try {
+    const response = await fetch("https://localhost:8000/api/blogcontent", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify([formData]),
+    });
+
+    if (response.ok) {
+      setFormData({
+        title: "",
+        description: "",
+      });
+      refetch();
+    } else {
+      console.error("Failed to post data:", await response.text());
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+```
+
+#### Important part 3: login
+
+Importantly, the formData is cleaned after the fetch. But there could be security issue, as the state can be accessed by the dev tools?
+
+```js
+function onUserSubmit(event) {
+  event.preventDefault();
+  fetch("https://localhost:8000/api/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify([formData]),
+  })
+    .then((response) => {
+      // Cleaning the state for security
+      setFormData({
+        ...formData,
+        password: "",
+      });
+      if (response.status === 200) {
+        setUser({ username: formData.username });
+        return navigate("/blog");
+      } else if (response.status === 401) {
+        alert("Wrong credentials. Memory is a tricky thing.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+```
